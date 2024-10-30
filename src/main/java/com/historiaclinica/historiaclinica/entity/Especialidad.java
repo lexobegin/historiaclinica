@@ -17,7 +17,8 @@ public class Especialidad {
     private String nombre;
     private boolean estado = true;
 
-    @OneToMany(mappedBy = "especialidad")
-    private List<Usuario> medicos; // Relación con Médicos
+    @ManyToOne
+    @JoinColumn(name = "medico_id", nullable = false)
+    private Usuario medico; // Relación con el usuario de tipo médico
 
 }

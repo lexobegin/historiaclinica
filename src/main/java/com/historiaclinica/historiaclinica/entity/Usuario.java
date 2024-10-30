@@ -24,14 +24,16 @@ public class Usuario implements UserDetails {
     private String password;
     private String telefono;
     private String direccion;
+    private String edad;
+    private String peso;
+    private String altura;
 
     // Atributos específicos de Medico
     private String estadoMedico = "Activo"; //Activo, En licencia, etc
     private String nroLicencia;
 
-    @ManyToOne
-    @JoinColumn(name = "especialidad_id")
-    private Especialidad especialidad;  // Relación con Especialidad
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Especialidad> especialidades; // Relación Uno a Muchos con Especialidad
 
     @OneToMany(mappedBy = "usuario")
     private List<DiaAtencion> diasAtencion; // Relación con Día de Atención
@@ -39,20 +41,22 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "medico")
     private List<FichaAtencion> fichasAtencionm; // Relación con Ficha de Atención
 
+
+
+
+    // Atributos específicos de Paciente
+    private boolean sexo; //true=Masculino, false=Femenino
+    private Boolean estadoPaciente = true;
+
+    @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL)
+    private AntecedenteMedico antecedenteMedico;  // Relación con AntecedenteMedico
+
     @OneToMany(mappedBy = "paciente")
     private List<FichaAtencion> fichasAtencionp; // Relación con Ficha de Atención
 
 
-    // Atributos específicos de Paciente
-    private String genero;
-    private Boolean estadoPaciente = true;
-
     // Atributos específicos de Administrador
     private Boolean estadoAdmin = true;
-
-
-
-
 
 
 
