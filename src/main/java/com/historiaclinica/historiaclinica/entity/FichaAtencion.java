@@ -7,6 +7,7 @@ import lombok.Data;
 @Entity
 @Table(name = "fichaatencion")
 public class FichaAtencion {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,4 +21,8 @@ public class FichaAtencion {
     @ManyToOne
     @JoinColumn(name = "paciente_id")
     private Usuario paciente; // Relación con Paciente
+
+    @OneToOne(mappedBy = "fichaAtencion", cascade = CascadeType.ALL)
+    private EvaluacionInicial evaluacionInicial; // Relación Uno a Uno con EvaluacionInicial
+
 }
