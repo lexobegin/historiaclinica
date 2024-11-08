@@ -1,5 +1,6 @@
 package com.historiaclinica.historiaclinica.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,14 +12,21 @@ import java.util.List;
 public class Especialidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    //@Column(nullable = false)
+    //@Column(nullable = false)condicionestratadas
     private String nombre;
+    private String descripcion;
+    private String condicionestratadas;
     private boolean estado = true;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "medico_id", nullable = false)
-    private Usuario medico; // Relación con el usuario de tipo médico
+    @JsonBackReference
+    private Usuario medico;*/ // Relación con el usuario de tipo médico
+
+    @ManyToMany(mappedBy = "especialidades")
+    //@JsonBackReference
+    private List<Usuario> usuarios; // Relación muchos a muchos con Usuario
 
 }
