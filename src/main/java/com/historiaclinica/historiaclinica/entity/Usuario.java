@@ -1,5 +1,8 @@
 package com.historiaclinica.historiaclinica.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.historiaclinica.historiaclinica.dto.ReqRes;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,8 +35,19 @@ public class Usuario implements UserDetails {
     private String estadoMedico = "Activo"; //Activo, En licencia, etc
     private String nroLicencia;
 
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Especialidad> especialidades; // Relación Uno a Muchos con Especialidad
+    /*@OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Especialidad> especialidades;*/ // Relación Uno a Muchos con Especialidad
+
+    @ManyToMany
+    @JoinTable(
+            name = "usuario_especialidad",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "especialidad_id")
+    )
+    //@JsonManagedReference
+    private List<Especialidad> especialidades; // Relación muchos a muchos con Especialidad
+
 
     @OneToMany(mappedBy = "usuario")
     private List<DiaAtencion> diasAtencion; // Relación con Día de Atención

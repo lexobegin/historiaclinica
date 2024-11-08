@@ -11,7 +11,7 @@ import java.util.List;
 public class HorarioAtencion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String horaInicio;
     private String horaFin;
     private String hora;
