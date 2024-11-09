@@ -38,12 +38,14 @@ public class UsuarioService {
 
         try {
             Usuario ourUser = new Usuario();
-            ourUser.setEmail(registrationRequest.getEmail());
-
             ourUser.setRole(registrationRequest.getRole());
             ourUser.setNombre(registrationRequest.getNombre());
+            ourUser.setDireccion(registrationRequest.getDireccion());
+            ourUser.setEmail(registrationRequest.getEmail());
+
             ourUser.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
             Usuario ourUsersResult = usuarioRepo.save(ourUser);
+
             if (ourUsersResult.getId()>0) {
                 resp.setUsuarios(ourUsersResult);
                 resp.setMessage("User Saved Successfully");
