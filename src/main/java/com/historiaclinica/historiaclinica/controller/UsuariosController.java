@@ -19,6 +19,11 @@ public class UsuariosController {
     @Autowired
     private UsuarioService usersManagementService;
 
+    @PostMapping("/admin/user/create")
+    public ResponseEntity<ReqRes> signIn(@RequestBody ReqRes registrationRequest){
+        return ResponseEntity.ok(usersManagementService.register(registrationRequest));
+    }
+
     @GetMapping("/admin/get-all-users")
     public ResponseEntity<ReqRes> getAllUsers(){
         return ResponseEntity.ok(usersManagementService.getAllUsers());
