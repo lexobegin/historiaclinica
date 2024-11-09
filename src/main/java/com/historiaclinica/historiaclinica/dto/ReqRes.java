@@ -21,6 +21,7 @@ public class ReqRes {
     private String refreshToken;
     private String expirationTime;
     private String nombre;
+    private String direccion;
     private String email;
     private String role;
     private String password;
