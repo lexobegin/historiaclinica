@@ -200,15 +200,17 @@ public class UsuarioService {
     }
 
     public ReqRes updateUser(Integer userId, Usuario updatedUser) {
-        System.out.println("Entrooo");
+        System.out.println("OK UPDATEUSER");
         ReqRes reqRes = new ReqRes();
         try {
             Optional<Usuario> userOptional = usuarioRepo.findById(userId);
             if (userOptional.isPresent()) {
                 Usuario existingUser = userOptional.get();
-                existingUser.setEmail(updatedUser.getEmail());
-                existingUser.setNombre(updatedUser.getNombre());
                 existingUser.setRole(updatedUser.getRole());
+                existingUser.setNombre(updatedUser.getNombre());
+                existingUser.setDireccion(updatedUser.getDireccion());
+                existingUser.setEmail(updatedUser.getEmail());
+
 
                 // Check if password is present in the request
                 if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
