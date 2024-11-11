@@ -641,8 +641,10 @@ public class DatabaseSeeder implements CommandLineRunner {
             // Filtrar los permisos para el rol "PACIENTE"
             List<Permiso> permisosUsuarios = new ArrayList<>();
             for (Permiso permiso : permisosRepository.findAll()) {
-                if (permiso.getNombre().startsWith("Listar") &&
-                        !permiso.getNombre().equals("Listar Paciente")) {
+                if (permiso.getNombre().startsWith("Ver") &&
+                        !permiso.getNombre().equals("Sacar Ficha") &&
+                !permiso.getNombre().equals("Ver Medico y Especialidad")&&
+                        !permiso.getNombre().equals("Sacar Ficha")) {
                     permisosUsuarios.add(permiso);
                 }
             }
@@ -659,7 +661,9 @@ public class DatabaseSeeder implements CommandLineRunner {
             List<Permiso> permisosMedico = new ArrayList<>();
             for (Permiso permiso : permisosRepository.findAll()) {
                 if (permiso.getNombre().startsWith("Listar") &&
-                        !permiso.getNombre().equals("Listar Medico")) {
+                        !permiso.getNombre().equals("Listar Medico")
+                        &&
+                        !permiso.getNombre().equals("Ver Ficha")) {
                     permisosUsuarios.add(permiso);
                 }
             }
@@ -677,20 +681,40 @@ public class DatabaseSeeder implements CommandLineRunner {
     }
 
     private void createPermisos() {
-        permisosRepository.save(createPermiso("Listar Usuarios"));
-        permisosRepository.save(createPermiso("Editar Usuarios"));
-        permisosRepository.save(createPermiso("Eliminar Usuarios"));
-        permisosRepository.save(createPermiso("Crear Usuarios"));
+        permisosRepository.save(createPermiso("Listar Usuario"));
+        permisosRepository.save(createPermiso("Crear Usuario"));
+        permisosRepository.save(createPermiso("Editar Usuario"));
+        permisosRepository.save(createPermiso("Eliminar Usuario"));
+
+        permisosRepository.save(createPermiso("Listar Especialidad"));
+        permisosRepository.save(createPermiso("Crear Especialidad"));
+        permisosRepository.save(createPermiso("Editar Especialidad"));
+        permisosRepository.save(createPermiso("Eliminar Especialidad"));
+
+        permisosRepository.save(createPermiso("Listar Medico"));
+        permisosRepository.save(createPermiso("Crear Medico"));
+        permisosRepository.save(createPermiso("Editar Medico"));
+        permisosRepository.save(createPermiso("Eliminar Medico"));
+
+        permisosRepository.save(createPermiso("Listar Horario"));
+        permisosRepository.save(createPermiso("Crear Horario"));
+        permisosRepository.save(createPermiso("Editar Horario"));
+        permisosRepository.save(createPermiso("Eliminar Horario"));
 
         permisosRepository.save(createPermiso("Listar Pacientes"));
+        permisosRepository.save(createPermiso("Crear Pacientes"));
         permisosRepository.save(createPermiso("Editar Pacientes"));
         permisosRepository.save(createPermiso("Eliminar Pacientes"));
-        permisosRepository.save(createPermiso("Crear Pacientes"));
 
-        permisosRepository.save(createPermiso("Listar Medicos"));
-        permisosRepository.save(createPermiso("Editar Medicos"));
-        permisosRepository.save(createPermiso("Eliminar Medicos"));
-        permisosRepository.save(createPermiso("Crear Medicos"));
+        permisosRepository.save(createPermiso("Ver Medico y Especialidad"));
+        permisosRepository.save(createPermiso("Sacar Ficha"));
+        permisosRepository.save(createPermiso("Ver Ficha"));
+        permisosRepository.save(createPermiso("Ver Historial"));
+
+
+
+
+
 
 //        permisosRepository.save(createPermiso("Listar Carreras"));
 //        permisosRepository.save(createPermiso("Editar Carreras"));
