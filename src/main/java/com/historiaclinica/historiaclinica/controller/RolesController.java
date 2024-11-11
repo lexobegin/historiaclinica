@@ -59,7 +59,7 @@ public class RolesController {
         }
     }
 
-    @PutMapping("/rol/{id}") //update
+    @PutMapping("/update-rol/{id}") //update
     public ResponseEntity<?> updateRol(@PathVariable("id") Integer id, @RequestBody RolRequest roleUpdateRequest) {
         Optional<Rol> existingRole = rolesRepository.findById(id);
 
@@ -82,13 +82,13 @@ public class RolesController {
         return ResponseEntity.ok(roleToUpdate);
     }
 
-    @DeleteMapping("/rol/{id}")
+    @DeleteMapping("/delete-rol/{id}")
     public ResponseEntity<Void> deleteRole(@PathVariable Integer id) {
         rolesService.deleteRole(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/rol/{id}")
+    @GetMapping("/get-rol/{id}")
     public ResponseEntity<Rol> getRoleById(@PathVariable Integer id) {
         Rol role = rolesService.getRoleById(id);
         return ResponseEntity.ok(role);
