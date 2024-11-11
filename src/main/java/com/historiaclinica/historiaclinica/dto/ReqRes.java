@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.historiaclinica.historiaclinica.entity.Especialidad;
 import com.historiaclinica.historiaclinica.entity.Usuario;
 import lombok.Data;
 
@@ -22,6 +23,9 @@ public class ReqRes {
     private String expirationTime;
     private String nombre;
     private String direccion;
+    private String telefono;
+    private String edad;
+    private String nroLicencia;
     private String email;
     private String role;
     private String password;
@@ -31,5 +35,6 @@ public class ReqRes {
 
     //@JsonManagedReference
     private List<Usuario> usuariosList;
+    private List<Integer> especialidades;
 
 }

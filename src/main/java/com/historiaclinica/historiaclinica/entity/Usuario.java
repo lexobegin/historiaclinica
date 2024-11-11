@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -46,7 +47,7 @@ public class Usuario implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "especialidad_id")
     )
     //@JsonManagedReference
-    private List<Especialidad> especialidades; // Relación muchos a muchos con Especialidad
+    private List<Especialidad> especialidades = new ArrayList<>(); // Relación muchos a muchos con Especialidad
 
 
     @OneToMany(mappedBy = "usuario")

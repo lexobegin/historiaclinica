@@ -25,8 +25,8 @@ public class Especialidad {
     @JsonBackReference
     private Usuario medico;*/ // Relación con el usuario de tipo médico
 
-    @ManyToMany(mappedBy = "especialidades")
+    //NO//@ManyToMany(mappedBy = "especialidades")
     //@JsonBackReference
-    private List<Usuario> usuarios; // Relación muchos a muchos con Usuario
+    //NO//private List<Usuario> usuarios; // Relación muchos a muchos con Usuario
 
 }
