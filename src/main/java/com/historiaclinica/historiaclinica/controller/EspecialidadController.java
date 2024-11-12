@@ -1,5 +1,6 @@
 package com.historiaclinica.historiaclinica.controller;
 
+import com.historiaclinica.historiaclinica.dto.EspecialidadRequest;
 import com.historiaclinica.historiaclinica.entity.Especialidad;
 import com.historiaclinica.historiaclinica.service.EspecialidadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,29 +21,28 @@ public class EspecialidadController {
         List<Especialidad> especialidades = especialidadService.getAllEspecialidades();
         return ResponseEntity.ok(especialidades);
     }
-    /*
-    @PostMapping("/create-aula")
-    public ResponseEntity<Aulas> createAula(@RequestBody AulasRequest aulasRequest) {
-        Aulas createdAula = aulasService.createAula(aulasRequest);
-        return ResponseEntity.ok(createdAula);
+
+    @PostMapping("/especialidad/create")
+    public ResponseEntity<Especialidad> createEspecialidad(@RequestBody EspecialidadRequest especialidadRequest) {
+        Especialidad createdEspecialidad = especialidadService.createEspecialidad(especialidadRequest);
+        return ResponseEntity.ok(createdEspecialidad);
     }
 
-    @PutMapping("/update-aula/{id}")
-    public ResponseEntity<Aulas> updateAula(@PathVariable Integer id, @RequestBody AulasRequest aulasRequest) {
-        Aulas updatedAula = aulasService.updateAula(id, aulasRequest);
-        return ResponseEntity.ok(updatedAula);
+    @PutMapping("/especialidad/update/{id}")
+    public ResponseEntity<Especialidad> updateEspecialidad(@PathVariable Integer id, @RequestBody EspecialidadRequest especialidadRequest) {
+        Especialidad updatedEspecialidad = especialidadService.updateEspecialidad(id, especialidadRequest);
+        return ResponseEntity.ok(updatedEspecialidad);
     }
 
-    @DeleteMapping("/delete-aula/{id}")
-    public ResponseEntity<Void> deleteAula(@PathVariable Integer id) {
-        aulasService.deleteAula(id);
+    @DeleteMapping("/especialidad/delete/{id}")
+    public ResponseEntity<Void> deleteEspecialidad(@PathVariable Integer id) {
+        especialidadService.deleteEspecialidad(id);
         return ResponseEntity.noContent().build();
     }
 
-
-    @GetMapping("/get-aula/{id}")
-    public Aulas getAulaById(@PathVariable Integer id) {
-        return aulasService.getAulaById(id);
+    @GetMapping("/especialidad/get/{id}")
+    public Especialidad getEspecialidadById(@PathVariable Integer id) {
+        return especialidadService.getEspecialidadById(id);
     }
-    */
+
 }
