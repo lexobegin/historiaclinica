@@ -1,13 +1,13 @@
 package com.historiaclinica.historiaclinica.controller;
 
 import com.historiaclinica.historiaclinica.dto.ReqRes;
-import com.historiaclinica.historiaclinica.dto.UserProfileMovil;
+import com.historiaclinica.historiaclinica.dto.UsuarioRequest;
 import com.historiaclinica.historiaclinica.entity.Usuario;
+import com.historiaclinica.historiaclinica.repository.UsuarioRepo;
 import com.historiaclinica.historiaclinica.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +18,12 @@ public class PacientesController {
 
     @Autowired
     private UsuarioService usersManagementService;
+
+    @Autowired
+    private UsuarioRepo usuarioRepo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("get-all")
     public ResponseEntity<ReqRes> getAllUsers(){
@@ -30,6 +36,7 @@ public class PacientesController {
         List<Usuario> User = usersManagementService.getAllPaciente();
         return ResponseEntity.ok(User);
     }
+
 
 //    @GetMapping("/admin/get-all-usersV2")
 //    public ResponseEntity<List<Usuario>> getAllUsersV2() {
@@ -46,6 +53,46 @@ public class PacientesController {
     @PutMapping("/{pacienteId}")   //update
     public ResponseEntity<ReqRes> updateUser(@PathVariable Integer pacienteId, @RequestBody Usuario reqres){
         return ResponseEntity.ok(usersManagementService.updateUser(pacienteId, reqres));
+    }
+
+    @PostMapping("/paciente/create")
+    public ResponseEntity<?> createPaciente(@RequestBody UsuarioRequest createPacienteRequest) {
+        try {
+
+            // Crear paciente
+            Usuario usuario = new Usuario();
+            usuario.setNombre(createPacienteRequest.getNombre());
+            usuario.setDireccion(createPacienteRequest.getDireccion());
+            usuario.setTelefono(createPacienteRequest.getTelefono());
+            usuario.setEdad(createPacienteRequest.getEdad());
+            usuario.setRole("PACIENTE");
+            usuario.setSexo(createPacienteRequest.isSexo());
+            usuario.setEstadoPaciente(true);
+
+            usuario.setEmail(createPacienteRequest.getEmail());
+            usuario.setPassword(passwordEncoder.encode(createPacienteRequest.getPassword()));
+
+            usuarioRepo.save(usuario);
+
+            return ResponseEntity.ok(usuario);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error al crear el paciente: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/paciente/{pacienteId}") // getUser(id)
+    public ResponseEntity<ReqRes> getPacienteByID(@PathVariable Integer pacienteId){
+        return ResponseEntity.ok(usersManagementService.getUsersById(pacienteId));
+    }
+
+    @PutMapping("/paciente/{pacienteId}")   //update
+    public ResponseEntity<ReqRes> updatePaciente(@PathVariable Integer pacienteId, @RequestBody Usuario reqres){
+        return ResponseEntity.ok(usersManagementService.updateUser(pacienteId, reqres));
+    }
+
+    @DeleteMapping("/paciente/{pacienteId}")
+    public ResponseEntity<ReqRes> deletePaciente(@PathVariable Integer userId){
+        return ResponseEntity.ok(usersManagementService.deleteUser(userId));
     }
 
 //    @GetMapping("/adminuser/get-profile")

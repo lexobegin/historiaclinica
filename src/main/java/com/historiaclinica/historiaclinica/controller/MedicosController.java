@@ -152,7 +152,6 @@ public class MedicosController {
     @GetMapping("/medico/{medicoId}") // getUser(id)
     public ResponseEntity<ReqRes> getUSerByID(@PathVariable Integer pacienteId){
         return ResponseEntity.ok(usersManagementService.getUsersById(pacienteId));
-
     }
 
     @PutMapping("/medico/{medicoId}")   //update
